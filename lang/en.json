@@ -1,0 +1,27 @@
+{
+    "Language": "English",
+    "details": "Details",
+    "discover": "Discover",
+    "authors": [
+        "{0}",
+        {
+            "one": "Author",
+            "many": "Authors"
+        }
+    ],
+    "comments": [
+        "{0}",
+        {
+            "one": "Comment",
+            "many": "Comments"
+        }
+    ],
+    "back": "Back",
+    "video": "Video",
+    "unknown": "Unknown",
+    "default": "Default",
+    "about": "About",
+    "powered-by-mvp": "Powered by MVP: Metro Video Player.",
+    "licensed-under-0": "Licensed under {0}.",
+    "obtain-source-code": "Obtain source code"
+}
