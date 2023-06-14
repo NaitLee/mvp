@@ -2,7 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import { PageProps } from "$fresh/server.ts";
 import { Handlers } from "$fresh/server.ts";
 import { Status, STATUS_TEXT, acceptsLanguages } from "$std/http/mod.ts";
-import { DEFAULT_DATA, i18n, MAX_POST_SIZE, TEST_DATA } from "../common/constants.ts";
+import { DEFAULT_DATA, i18n, MAX_POST_SIZE, REPO, TEST_DATA } from "../common/constants.ts";
 
 const _ = i18n._;
 
@@ -113,7 +113,7 @@ export default function Video(props: PageProps<Metadata>) {
                 <section id="about">
                     <h2>{data.provider}</h2>
                     <p>{data.provider_intro}</p>
-                    <p><a href="">{_('powered-by-mvp')}</a></p>
+                    <p><a href={REPO}>{_('powered-by-mvp')}</a></p>
                     <p><a href={data.license_link}>{_('licensed-under-0', _(data.license))}</a></p>
                     <p><a href={data.source_code_link}>{_('obtain-source-code')}</a></p>
                 </section>

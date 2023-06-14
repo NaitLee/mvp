@@ -3,6 +3,7 @@ import I18nx from "../i18nx/i18n.ts";
 export const MAX_POST_SIZE = 1 << 20;
 const langpath = './lang/';
 export const i18n = new I18nx();
+export const REPO = 'https://github.com/NaitLee/mvp';
 for await (const entry of Deno.readDir(langpath)) {
     if (!entry.name.endsWith('.json')) continue;
     const lang = entry.name.slice(0, entry.name.lastIndexOf('.'));
@@ -23,7 +24,7 @@ export const DEFAULT_DATA: Metadata = {
     description: '',
     comments: [],
     discover: [],
-    source_code_link: '',
+    source_code_link: 'https://github.com/NaitLee/mvp',
     license: 'CC0',
     license_link: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
 };
@@ -84,7 +85,7 @@ And of course: Have lots of fun!`,
             duration: '0:07'
         }
     ],
-    source_code_link: '',
+    source_code_link: 'https://github.com/NaitLee/mvp',
     license: 'CC0',
     license_link: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
 };
