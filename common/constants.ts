@@ -26,10 +26,11 @@ export const DEFAULT_DATA: Metadata = {
     discover: [],
     source_code_link: 'https://github.com/NaitLee/mvp',
     license: 'CC0',
-    license_link: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
+    license_link: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode',
+    origin: ''
 };
 
-export const TEST_DATA: Metadata = {
+export const TEST_DATA: Metadata = Object.assign(Object.create(DEFAULT_DATA), {
     version: 0,
     sources: [
         [
@@ -43,8 +44,6 @@ export const TEST_DATA: Metadata = {
         ]
     ],
     index: 0,
-    provider: 'MVP',
-    provider_intro: 'Metro Video Player',
     theme: {
         fore: '#ffffff',
         theme: '#339933',
@@ -84,8 +83,5 @@ And of course: Have lots of fun!`,
             authors: [],
             duration: '0:07'
         }
-    ],
-    source_code_link: 'https://github.com/NaitLee/mvp',
-    license: 'CC0',
-    license_link: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode'
-};
+    ]
+});

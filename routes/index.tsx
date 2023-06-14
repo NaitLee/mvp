@@ -6,7 +6,7 @@ import { DEFAULT_DATA, i18n, MAX_POST_SIZE, REPO, TEST_DATA } from "../common/co
 
 const _ = i18n._;
 
-function metadata_from_partial(query: QueryParam): Metadata {
+function metadata_from_search(query: QueryParam): Partial<Metadata> {
     if (query.test)
         return TEST_DATA;
     const data: Metadata = Object.create(DEFAULT_DATA);
@@ -22,9 +22,15 @@ function metadata_from_partial(query: QueryParam): Metadata {
     return data;
 }
 
+function metadata_from_partial(req: Request, part: Partial<Metadata>) {
+    const data = Object.assign(Object.create(DEFAULT_DATA), part);
+    data.origin = new URL(req.url).origin;
+    return data;
+}
+
 function loadlang(req: Request) {
     i18n.reset();
-    for (const lang of acceptsLanguages(req))
+    for (const lang of acceptsLanguages(req).concat('en-US'))
         i18n.append(lang);
 }
 
@@ -32,7 +38,8 @@ export const handler: Handlers = {
     GET(req, ctx) {
         loadlang(req);
         const url = new URL(req.url);
-        const data: Metadata = metadata_from_partial(Object.fromEntries(url.searchParams) as QueryParam);
+        const part: Partial<Metadata> = metadata_from_search(Object.fromEntries(url.searchParams) as QueryParam);
+        const data: Metadata = metadata_from_partial(req, part);
         return ctx.render(data);
     },
     async POST(req, ctx) {
@@ -43,7 +50,8 @@ export const handler: Handlers = {
                 status: Status.RequestEntityTooLarge,
                 statusText: STATUS_TEXT[Status.RequestEntityTooLarge]
             });
-        return ctx.render(await req.json());
+        const data = metadata_from_partial(req, await req.json())
+        return ctx.render(data);
     }
 };
 
@@ -54,7 +62,7 @@ export default function Video(props: PageProps<Metadata>) {
         <>
             <Head>
                 <title>{data.provider} - {active_source.title}</title>
-                <link rel="stylesheet" href="main.css" />
+                <link rel="stylesheet" href={data.origin + '/main.css'} />
                 <style>
                     {`
                         :root {
